@@ -28,9 +28,6 @@ Kalman kalmanPitch;
 float azimuth = 0, old_azimuth;
 float mag_x_hor = 0, mag_y_hor = 0;
 
-double x_distance = 0, y_distance = 0, z_distance = 0;
-float initial_velocity_x = 0, initial_velocity_y = 0, initial_velocity_z = 0;
-
 float low_pass_filter(float old_val, float new_val) {
   return old_val * 0.8 + new_val * 0.2;
 }
