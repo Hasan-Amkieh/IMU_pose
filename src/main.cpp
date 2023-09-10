@@ -9,7 +9,7 @@
 #define GYRO_RANGE   250
 #define ACCL_RANGE     2
 
-#define SENITIVITY_2G 120.0 // 120.0 LSB / MicroTesla == 12000.0 LSB / Gauss 
+#define SENITIVITY_2G 120.0 // 120.0 LSB / MicroTesla == 12000.0 LSB / Gauss
 #define SENITIVITY_8G 30.0
 
 #define ANKARA_DECLINATION 1.18333333333333333333333333 // east is positive
@@ -29,8 +29,6 @@ float azimuth = 0, old_azimuth;
 float mag_x_hor = 0, mag_y_hor = 0;
 
 double x_distance = 0, y_distance = 0, z_distance = 0;
-float ax_linear, ay_linear, az_linear;
-float ax_linear_old = 0, ay_linear_old = 0, az_linear_old = 0;
 float initial_velocity_x = 0, initial_velocity_y = 0, initial_velocity_z = 0;
 
 float low_pass_filter(float old_val, float new_val) {
@@ -87,12 +85,6 @@ void print_roll_pitch()
   
   float kalm_roll  = kalmanRoll.getAngle(accl_roll, omega_roll, dt);
   float kalm_pitch = kalmanPitch.getAngle(accl_pitch, omega_pitch, dt);
-
-  ax_linear = accX * cos(deg_to_rad(kalm_pitch)) * cos(deg_to_rad(gyro_yaw)) + accY * (sin(deg_to_rad(kalm_roll)) * sin(deg_to_rad(kalm_pitch)) * cos(deg_to_rad(gyro_yaw))
-   - cos(deg_to_rad(kalm_roll)) * sin(deg_to_rad(gyro_yaw))) + accZ * (cos(deg_to_rad(kalm_roll)) * sin(deg_to_rad(kalm_pitch)) * cos(deg_to_rad(gyro_yaw)) + sin(deg_to_rad(kalm_roll)) * sin(deg_to_rad(gyro_yaw)));
-  ay_linear = accX * cos(deg_to_rad(kalm_pitch)) * sin(deg_to_rad(gyro_yaw)) + accY * (sin(deg_to_rad(kalm_roll)) * sin(deg_to_rad(kalm_pitch)) * sin(deg_to_rad(gyro_yaw))
-   + cos(deg_to_rad(kalm_roll)) * cos(deg_to_rad(gyro_yaw))) + accZ * (cos(deg_to_rad(kalm_roll)) * sin(deg_to_rad(kalm_pitch)) * sin(deg_to_rad(gyro_yaw)) - sin(deg_to_rad(kalm_roll)) * cos(deg_to_rad(gyro_yaw)));
-  az_linear = -accX * sin(deg_to_rad(kalm_pitch)) + accY * sin(deg_to_rad(kalm_roll)) * cos(deg_to_rad(kalm_pitch)) + accZ * cos(deg_to_rad(kalm_roll)) * cos(deg_to_rad(kalm_pitch)) - 1;
 
   int16_t raw_x = 0, raw_y = 0, raw_z = 0;
 
