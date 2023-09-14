@@ -141,7 +141,7 @@ void setup() {
   
   if (!Wire.begin(21, 22, 400000)) {
     Serial.println("I2C couldn't be initialized!");
-    while(false);
+    while(true);
   }
 
   uint8_t qmc_sense_rate;
